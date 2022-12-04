@@ -1,10 +1,13 @@
 package com.maro.roomescapediary.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -18,6 +21,9 @@ public class Store extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_seq")
     private Integer seq;
+
+    @OneToMany(mappedBy = "store")
+    private List<Theme> themes = new ArrayList<>();
 
     @Column(name = "address", nullable = false, length = 100)
     private String address;

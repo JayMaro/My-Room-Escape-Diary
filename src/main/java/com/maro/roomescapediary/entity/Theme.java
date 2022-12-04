@@ -1,11 +1,16 @@
 package com.maro.roomescapediary.entity;
 
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -20,8 +25,12 @@ public class Theme extends BaseEntity{
     @Column(name = "theme_seq")
     private Integer seq;
 
-    @Column(name = "store_seq", nullable = false)
-    private Integer storeSeq;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_seq")
+    private Store store;
+
+    @OneToMany(mappedBy = "theme")
+    private List<Review> reviews;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

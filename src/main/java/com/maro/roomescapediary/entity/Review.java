@@ -3,9 +3,12 @@ package com.maro.roomescapediary.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -20,11 +23,13 @@ public class Review extends BaseEntity{
     @Column(name = "review_seq")
     private Integer seq;
 
-    @Column(name = "theme_seq", nullable = false)
-    private Integer themeSeq;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "theme_seq")
+    private Theme theme;
 
-    @Column(name = "user_seq", nullable = false)
-    private Integer userSeq;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_seq")
+    private Users user;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title;
