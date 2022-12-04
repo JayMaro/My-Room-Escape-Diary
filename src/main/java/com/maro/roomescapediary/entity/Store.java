@@ -1,5 +1,6 @@
 package com.maro.roomescapediary.entity;
 
+import com.maro.roomescapediary.dto.StoreDto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -37,4 +39,29 @@ public class Store extends BaseEntity{
     @Column(name = "url", nullable = false, length = 500)
     private String url;
 
+    @Builder
+    public Store(String address, String name, String branchName, String url) {
+        this.address = address;
+        this.name = name;
+        this.branchName = branchName;
+        this.url = url;
+    }
+
+    public StoreDto toDto() {
+        return StoreDto.builder()
+            .seq(seq)
+            .address(address)
+            .name(name)
+            .branchName(branchName)
+            .url(url)
+            .useFlag(getUseFlag())
+            .build();
+    }
+
+    public void updateStore(StoreDto storeDto) {
+        address = storeDto.getAddress();
+        name = storeDto.getName();
+        branchName = storeDto.getBranchName();
+        url = storeDto.getUrl();
+    }
 }
