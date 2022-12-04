@@ -23,5 +23,13 @@ public class BaseEntity {
     private LocalDateTime updateDate;
 
     @Column(name = "user_flag", nullable = false)
-    private Boolean useFlag;
+    private Boolean useFlag = true;
+
+    public void restore() {
+        useFlag = true;
+    }
+
+    public void delete() {
+        useFlag = false;
+    }
 }
