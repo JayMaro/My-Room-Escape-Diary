@@ -91,6 +91,7 @@ API
 > 사용자가 하나의 테마당 하나의 리뷰만을 쓰게끔 설계
 >> theme_seq와 user_seq를 PK로 설정 OR unique key 설정
 >>> 나중에 후기에 이미지 추가 기능이 생긴다면 review_seq 필요 → unique key 설정
+>>> theme와 user seq를 한 번에 unique 걸기
 
 </aside>
 
@@ -101,7 +102,7 @@ API
 | image_seq  | int | Primary Key, Not null |  | 이미지 일련번호 |
 | type_seq | int | Not null |  | 해당하는 table의 일련번호 |
 | table_code | varchar(50) | Not null |  | 테이블 코드(STORE, THEME, (REVIEW), …) |
-| image_url | varchar(500) | Not null |  | 이미지 url |
+| url | varchar(500) | Not null |  | 이미지 url |
 | use_flag | tinyint(1) | Not null |  | 사용 여부 |
 | reg_date | datetime | Not null |  | 등록일 |
 | update_date | datetime | Not null |  | 수정일 |
@@ -121,7 +122,7 @@ API
 | join_code | varchar(50) | Not null |  | 회원가입 코드(HOME, KAKAO, …) |
 | id | varchar(100) | Not null, unique |  |  |
 | password | varchar(200) | Not null |  |  |
-| nickName | varchar(50) | Not null, unique |  |  |
+| nick_name | varchar(50) | Not null, unique |  |  |
 | use_flag | tinyint(1) | Not null |  | 사용 여부 |
 | reg_date | datetime | Not null |  | 등록일 |
 | update_date | datetime | Not null |  | 수정일 |
