@@ -10,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class StoreDto {
 
-    private Integer seq;
+    private int seq;
 
     private String address;
 
