@@ -1,6 +1,8 @@
 package com.maro.roomescapediary.entity;
 
 
+import com.maro.roomescapediary.dto.ThemeDto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,7 +35,7 @@ public class Theme extends BaseEntity{
     private Store store;
 
     @OneToMany(mappedBy = "theme")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -49,4 +52,35 @@ public class Theme extends BaseEntity{
     @Column(name = "url", nullable = false, length = 500)
     private String url;
 
+    @Builder
+    public Theme(Store store, String name, Integer price, Double difficultyRating, String desc, String url) {
+        this.store = store;
+        this.name = name;
+        this.price = price;
+        this.difficultyRating = difficultyRating;
+        this.desc = desc;
+        this.url = url;
+    }
+
+    public ThemeDto toDto() {
+        return ThemeDto.builder()
+            .seq(seq)
+            .storeSeq(store.getSeq())
+            .name(name)
+            .price(price)
+            .difficultyRating(difficultyRating)
+            .desc(desc)
+            .url(url)
+            .useFlag(getUseFlag())
+            .build();
+    }
+
+    public void updateTheme(Store store, ThemeDto themeDto) {
+        this.store = store;
+        this.name = themeDto.getName();
+        this.price = themeDto.getPrice();
+        this.difficultyRating = themeDto.getDifficultyRating();
+        this.desc = themeDto.getDesc();
+        this.url = themeDto.getUrl();
+    }
 }
