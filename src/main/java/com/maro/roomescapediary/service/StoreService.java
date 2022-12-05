@@ -1,13 +1,12 @@
 package com.maro.roomescapediary.service;
 
 import com.maro.roomescapediary.dto.StoreDto;
-import com.maro.roomescapediary.entity.BaseEntity;
 import com.maro.roomescapediary.entity.Store;
+import com.maro.roomescapediary.repository.StoreRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.maro.roomescapediary.repository.StoreRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -22,7 +21,7 @@ public class StoreService {
     }
 
     public StoreDto searchStore(int storeSeq) {
-        Store store = storeRepository.findById(storeSeq).orElseThrow(RuntimeException::new);
+        Store store = this.findById(storeSeq);
         return store.toDto();
     }
 
@@ -33,13 +32,17 @@ public class StoreService {
 
     @Transactional
     public void modifyStore(StoreDto storeDto) {
-        storeRepository.findById(storeDto.getSeq()).ifPresent(
-            store -> store.updateStore(storeDto)
-        );
+        Store store = this.findById(storeDto.getSeq());
+        store.updateStore(storeDto);
     }
 
     @Transactional
     public void removeStore(int storeSeq) {
-        storeRepository.findById(storeSeq).ifPresent(BaseEntity::delete);
+        Store store = this.findById(storeSeq);
+        store.delete();
+    }
+
+    public Store findById(int storeSeq) {
+        return storeRepository.findById(storeSeq).orElseThrow(RuntimeException::new);
     }
 }
