@@ -1,6 +1,6 @@
 package com.maro.roomescapediary.entity;
 
-import com.maro.roomescapediary.domain.common.JoinCode;
+import com.maro.roomescapediary.enums.JoinCode;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
