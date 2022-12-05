@@ -1,6 +1,7 @@
 package com.maro.roomescapediary.entity;
 
 import com.maro.roomescapediary.enums.JoinCode;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Users extends BaseEntity{
     private Integer seq;
 
     @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @Column(name = "join_code", nullable = false, length = 50)
     private JoinCode joinCode;
