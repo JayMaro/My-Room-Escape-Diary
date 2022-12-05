@@ -43,6 +43,6 @@ public class StoreService {
     }
 
     public Store findById(int storeSeq) {
-        return storeRepository.findById(storeSeq).orElseThrow(RuntimeException::new);
+        return storeRepository.findById(storeSeq).orElseThrow(IllegalArgumentException::new);
     }
 }
