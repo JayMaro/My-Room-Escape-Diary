@@ -1,5 +1,6 @@
 package com.maro.roomescapediary.entity;
 
+import com.maro.roomescapediary.dto.UserDto;
 import com.maro.roomescapediary.enums.JoinCode;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -39,4 +41,31 @@ public class Users extends BaseEntity{
 
     @Column(name = "nick_name", nullable = false, unique = true, length = 50)
     private String nickName;
+
+    @Builder
+    public Users(JoinCode joinCode, String id, String password, String nickName) {
+        this.joinCode = joinCode;
+        this.id = id;
+        this.password = password;
+        this.nickName = nickName;
+    }
+
+    public UserDto toDto() {
+        return UserDto.builder()
+            .seq(seq)
+            .joinCode(joinCode)
+            .id(id)
+            .password(password)
+            .nickName(nickName)
+            .useFlag(getUseFlag())
+            .build();
+    }
+
+    public void updateUser(UserDto userDto) {
+        this.joinCode = userDto.getJoinCode();
+        this.id = userDto.getId();
+        this.password = userDto.getPassword();
+        this.nickName = userDto.getNickName();
+    }
+
 }
