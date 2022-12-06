@@ -1,6 +1,7 @@
 package com.maro.roomescapediary.entity;
 
-import java.time.LocalDateTime;
+import com.maro.roomescapediary.dto.ReviewDto;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -43,7 +45,7 @@ public class Review extends BaseEntity{
     private Boolean successFlag;
 
     @Column(name = "visit_date", nullable = false)
-    private LocalDateTime visitDate;
+    private LocalDate visitDate;
 
     @Column(name = "review_rating", nullable = false)
     private Double reviewRating;
@@ -59,4 +61,52 @@ public class Review extends BaseEntity{
 
     @Column(name = "memo")
     private String memo;
+
+    @Builder
+    public Review(Theme theme, Users user, String title, Integer memberCount, Boolean successFlag, LocalDate visitDate, Double reviewRating,
+        Double difficultyRating, Double activityRating, Double fearRating, String memo) {
+        this.theme = theme;
+        this.user = user;
+        this.title = title;
+        this.memberCount = memberCount;
+        this.successFlag = successFlag;
+        this.visitDate = visitDate;
+        this.reviewRating = reviewRating;
+        this.difficultyRating = difficultyRating;
+        this.activityRating = activityRating;
+        this.fearRating = fearRating;
+        this.memo = memo;
+    }
+
+    public ReviewDto toDto() {
+        return ReviewDto.builder()
+            .seq(seq)
+            .themeSeq(theme.getSeq())
+            .userSeq(user.getSeq())
+            .title(title)
+            .memberCount(memberCount)
+            .successFlag(successFlag)
+            .visitDate(visitDate)
+            .reviewRating(reviewRating)
+            .difficultyRating(difficultyRating)
+            .activityRating(activityRating)
+            .fearRating(fearRating)
+            .memo(memo)
+            .useFlag(getUseFlag())
+            .build();
+    }
+
+    public void updateReview(ReviewDto reviewDto, Theme theme, Users user) {
+        this.theme = theme;
+        this.user = user;
+        this.title = reviewDto.getTitle();
+        this.memberCount = reviewDto.getMemberCount();
+        this.successFlag = reviewDto.isSuccessFlag();
+        this.visitDate = reviewDto.getVisitDate();
+        this.reviewRating = reviewDto.getReviewRating();
+        this.difficultyRating = reviewDto.getDifficultyRating();
+        this.activityRating = reviewDto.getActivityRating();
+        this.fearRating = reviewDto.getFearRating();
+        this.memo = reviewDto.getMemo();
+    }
 }
