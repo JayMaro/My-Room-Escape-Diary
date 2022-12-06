@@ -1,7 +1,6 @@
 package com.maro.roomescapediary.service;
 
 import com.maro.roomescapediary.dto.ThemeDto;
-import com.maro.roomescapediary.entity.BaseEntity;
 import com.maro.roomescapediary.entity.Store;
 import com.maro.roomescapediary.entity.Theme;
 import com.maro.roomescapediary.repository.ThemeRepository;
@@ -38,7 +37,7 @@ public class ThemeService {
     public void modifyTheme(ThemeDto themeDto) {
         Store store = storeService.findById(themeDto.getStoreSeq());
         Theme theme = this.findById(themeDto.getSeq());
-        theme.updateTheme(store, themeDto);
+        theme.updateTheme(themeDto, store);
     }
 
     @Transactional

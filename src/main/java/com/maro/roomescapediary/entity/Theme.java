@@ -75,7 +75,7 @@ public class Theme extends BaseEntity{
             .build();
     }
 
-    public void updateTheme(Store store, ThemeDto themeDto) {
+    public void updateTheme(ThemeDto themeDto, Store store) {
         this.store = store;
         this.name = themeDto.getName();
         this.price = themeDto.getPrice();
