@@ -1,5 +1,6 @@
 package com.maro.roomescapediary.entity;
 
+import com.maro.roomescapediary.dto.ImageDto;
 import com.maro.roomescapediary.enums.TableCode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +36,26 @@ public class Image extends BaseEntity{
     @Column(name = "url", nullable = false, length = 500)
     private String url;
 
+    @Builder
+    public Image(Integer typeSeq, TableCode tableCode, String url) {
+        this.typeSeq = typeSeq;
+        this.tableCode = tableCode;
+        this.url = url;
+    }
+
+    public ImageDto toDto() {
+        return ImageDto.builder()
+            .seq(seq)
+            .typeSeq(typeSeq)
+            .tableCode(tableCode)
+            .url(url)
+            .useFlag(getUseFlag())
+            .build();
+    }
+
+    public void updateImage(ImageDto imageDto) {
+        typeSeq = imageDto.getTypeSeq();
+        tableCode = imageDto.getTableCode();
+        url = imageDto.getUrl();
+    }
 }
