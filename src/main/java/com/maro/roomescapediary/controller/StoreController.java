@@ -1,9 +1,11 @@
 package com.maro.roomescapediary.controller;
 
 import com.maro.roomescapediary.dto.StoreDto;
+import com.maro.roomescapediary.dto.StoreSearchDto;
 import com.maro.roomescapediary.service.StoreService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,8 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping
-    public List<StoreDto> searchStores() {
-        return storeService.searchStores();
+    public Page<StoreDto> searchStores(StoreSearchDto searchDto, Pageable pageable) {
+        return storeService.searchStores(searchDto, pageable);
     }
 
     @GetMapping("/{storeSeq}")
