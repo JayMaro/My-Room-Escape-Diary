@@ -1,9 +1,12 @@
 package com.maro.roomescapediary.controller;
 
 import com.maro.roomescapediary.dto.ReviewDto;
+import com.maro.roomescapediary.dto.ReviewSearchDto;
 import com.maro.roomescapediary.service.ReviewService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +24,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping
-    public List<ReviewDto> searchReviews() {
-        return reviewService.searchReviews();
+    public Page<ReviewDto> searchReviews(ReviewSearchDto searchDto, Pageable pageable) {
+        return reviewService.searchReviews(searchDto, pageable);
     }
 
     @GetMapping("/{reviewSeq}")

@@ -5,6 +5,7 @@ import com.maro.roomescapediary.entity.Review;
 import com.maro.roomescapediary.entity.Theme;
 import com.maro.roomescapediary.entity.Users;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class ReviewDto {
 
     private int seq;
