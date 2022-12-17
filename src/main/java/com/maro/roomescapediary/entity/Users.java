@@ -36,17 +36,21 @@ public class Users extends BaseEntity{
     @Column(name = "id", nullable = false, unique = true, length = 100)
     private String id;
 
-    @Column(name = "password", nullable = false, length = 200)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
+
+    @Column(name = "salt", nullable = false, length = 100)
+    private String salt;
 
     @Column(name = "nick_name", nullable = false, unique = true, length = 50)
     private String nickName;
 
     @Builder
-    public Users(JoinCode joinCode, String id, String password, String nickName) {
+    public Users(JoinCode joinCode, String id, String password, String salt, String nickName) {
         this.joinCode = joinCode;
         this.id = id;
         this.password = password;
+        this.salt = salt;
         this.nickName = nickName;
     }
 
@@ -55,7 +59,6 @@ public class Users extends BaseEntity{
             .seq(seq)
             .joinCode(joinCode)
             .id(id)
-            .password(password)
             .nickName(nickName)
             .useFlag(getUseFlag())
             .build();
@@ -65,6 +68,7 @@ public class Users extends BaseEntity{
         this.joinCode = userDto.getJoinCode();
         this.id = userDto.getId();
         this.password = userDto.getPassword();
+        this.salt = userDto.getSalt();
         this.nickName = userDto.getNickName();
     }
 

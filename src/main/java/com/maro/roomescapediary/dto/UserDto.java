@@ -1,5 +1,6 @@
 package com.maro.roomescapediary.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.maro.roomescapediary.entity.Users;
 import com.maro.roomescapediary.enums.JoinCode;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +20,10 @@ public class UserDto {
     @NotBlank @Length(max = 100)
     private String id;
     @NotBlank
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String salt;
     @NotBlank @Length(max = 50)
     private String nickName;
 
@@ -30,6 +34,7 @@ public class UserDto {
             .joinCode(joinCode)
             .id(id)
             .password(password)
+            .salt(salt)
             .nickName(nickName)
             .build();
     }
