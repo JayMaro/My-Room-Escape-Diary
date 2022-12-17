@@ -16,6 +16,7 @@ public class UserDto {
 
     private int seq;
 
+    @NotBlank
     private JoinCode joinCode;
     @NotBlank @Length(max = 100)
     private String id;

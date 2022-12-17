@@ -6,8 +6,6 @@ import com.maro.roomescapediary.entity.Review;
 import com.maro.roomescapediary.entity.Theme;
 import com.maro.roomescapediary.entity.Users;
 import com.maro.roomescapediary.repository.ReviewRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,14 +33,14 @@ public class ReviewService {
     @Transactional
     public void addReview(ReviewDto reviewDto) {
         Theme theme = themeService.findById(reviewDto.getThemeSeq());
-        Users user = userService.findById(reviewDto.getUserSeq());
+        Users user = userService.findByUserSeq(reviewDto.getUserSeq());
         reviewRepository.save(reviewDto.toEntity(theme, user));
     }
 
     @Transactional
     public void modifyReview(ReviewDto reviewDto) {
         Theme theme = themeService.findById(reviewDto.getThemeSeq());
-        Users user = userService.findById(reviewDto.getUserSeq());
+        Users user = userService.findByUserSeq(reviewDto.getUserSeq());
         Review review = this.findById(reviewDto.getSeq());
         review.updateReview(reviewDto, theme, user);
     }
