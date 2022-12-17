@@ -1,11 +1,11 @@
 package com.maro.roomescapediary.review.repository;
 
-import static com.maro.roomescapediary.entity.QReview.review;
-import static com.maro.roomescapediary.entity.QTheme.theme;
+import static com.maro.roomescapediary.review.entity.QReview.review;
+import static com.maro.roomescapediary.theme.entity.QTheme.theme;
 
+import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.maro.roomescapediary.review.dto.ReviewDto;
 import com.maro.roomescapediary.review.dto.ReviewSearchDto;
-import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;

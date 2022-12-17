@@ -1,10 +1,10 @@
 package com.maro.roomescapediary.theme.repository;
 
-import static com.maro.roomescapediary.entity.QTheme.theme;
+import static com.maro.roomescapediary.theme.entity.QTheme.theme;
 
+import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.maro.roomescapediary.theme.dto.ThemeDto;
 import com.maro.roomescapediary.theme.dto.ThemeSearchDto;
-import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.maro.roomescapediary.store.repository;
 
-import static com.maro.roomescapediary.entity.QStore.store;
+import static com.maro.roomescapediary.store.entity.QStore.store;
 
+import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.maro.roomescapediary.store.dto.StoreDto;
 import com.maro.roomescapediary.store.dto.StoreSearchDto;
-import com.maro.roomescapediary.common.utils.CommonUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
