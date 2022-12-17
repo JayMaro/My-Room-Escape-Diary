@@ -3,6 +3,7 @@ package com.maro.roomescapediary.controller;
 import com.maro.roomescapediary.dto.StoreDto;
 import com.maro.roomescapediary.dto.StoreSearchDto;
 import com.maro.roomescapediary.service.StoreService;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,12 +34,12 @@ public class StoreController {
     }
 
     @PostMapping
-    public void addStore(@RequestBody StoreDto storeDto) {
+    public void addStore(@Valid @RequestBody StoreDto storeDto) {
         storeService.addStore(storeDto);
     }
 
     @PutMapping("/{storeSeq}")
-    public void modifyStore(@PathVariable int storeSeq, @RequestBody StoreDto storeDto) {
+    public void modifyStore(@PathVariable int storeSeq, @Valid @RequestBody StoreDto storeDto) {
         storeDto.setSeq(storeSeq);
         storeService.modifyStore(storeDto);
     }

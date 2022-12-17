@@ -3,6 +3,7 @@ package com.maro.roomescapediary.controller;
 import com.maro.roomescapediary.dto.ImageDto;
 import com.maro.roomescapediary.service.ImageService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +32,12 @@ public class ImageController {
     }
 
     @PostMapping
-    public void addImage(@RequestBody ImageDto imageDto) {
+    public void addImage(@Valid @RequestBody ImageDto imageDto) {
         imageService.addImage(imageDto);
     }
 
     @PutMapping("/{imageSeq}")
-    public void modifyImage(@PathVariable int imageSeq, @RequestBody ImageDto imageDto) {
+    public void modifyImage(@PathVariable int imageSeq, @Valid @RequestBody ImageDto imageDto) {
         imageDto.setSeq(imageSeq);
         imageService.modifyImage(imageDto);
     }

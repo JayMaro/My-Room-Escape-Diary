@@ -4,6 +4,7 @@ import com.maro.roomescapediary.dto.ReviewDto;
 import com.maro.roomescapediary.dto.ReviewSearchDto;
 import com.maro.roomescapediary.service.ReviewService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,12 +35,12 @@ public class ReviewController {
     }
 
     @PostMapping
-    public void addReview(@RequestBody ReviewDto reviewDto) {
+    public void addReview(@Valid @RequestBody ReviewDto reviewDto) {
         reviewService.addReview(reviewDto);
     }
 
     @PutMapping("/{reviewSeq}")
-    public void modifyReview(@PathVariable int reviewSeq, @RequestBody ReviewDto reviewDto) {
+    public void modifyReview(@PathVariable int reviewSeq, @Valid @RequestBody ReviewDto reviewDto) {
         reviewDto.setSeq(reviewSeq);
         reviewService.modifyReview(reviewDto);
     }

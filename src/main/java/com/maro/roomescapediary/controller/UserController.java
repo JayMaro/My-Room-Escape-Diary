@@ -2,6 +2,7 @@ package com.maro.roomescapediary.controller;
 
 import com.maro.roomescapediary.dto.UserDto;
 import com.maro.roomescapediary.service.UserService;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +26,12 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestBody UserDto userDto) {
+    public void addUser(@Valid @RequestBody UserDto userDto) {
         userService.addUser(userDto);
     }
 
     @PutMapping("/{userSeq}")
-    public void modifyUser(@PathVariable int userSeq, @RequestBody UserDto userDto) {
+    public void modifyUser(@PathVariable int userSeq, @Valid @RequestBody UserDto userDto) {
         userDto.setSeq(userSeq);
         userService.modifyUser(userDto);
     }

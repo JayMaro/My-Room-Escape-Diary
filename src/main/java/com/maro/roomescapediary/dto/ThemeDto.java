@@ -2,10 +2,15 @@ package com.maro.roomescapediary.dto;
 
 import com.maro.roomescapediary.entity.Store;
 import com.maro.roomescapediary.entity.Theme;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -14,17 +19,17 @@ import lombok.Setter;
 public class ThemeDto {
 
     private int seq;
-
+    @Positive
     private int storeSeq;
-
+    @NotBlank @Length(max = 100)
     private String name;
-
+    @Positive
     private int price;
-
+    @Positive @Digits(integer = 1, fraction = 1) @Max(5)
     private double difficultyRating;
-
+    @NotBlank
     private String desc;
-
+    @NotBlank @Length(max = 500)
     private String url;
 
     private boolean useFlag;

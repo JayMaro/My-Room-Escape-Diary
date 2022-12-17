@@ -4,6 +4,7 @@ import com.maro.roomescapediary.dto.ThemeDto;
 import com.maro.roomescapediary.dto.ThemeSearchDto;
 import com.maro.roomescapediary.service.ThemeService;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,12 +35,12 @@ public class ThemeController {
     }
 
     @PostMapping
-    public void addTheme(@RequestBody ThemeDto themeDto) {
+    public void addTheme(@Valid @RequestBody ThemeDto themeDto) {
         themeService.addTheme(themeDto);
     }
 
     @PutMapping("/{themeSeq}")
-    public void modifyTheme(@PathVariable int themeSeq, @RequestBody ThemeDto themeDto) {
+    public void modifyTheme(@PathVariable int themeSeq, @Valid @RequestBody ThemeDto themeDto) {
         themeDto.setSeq(themeSeq);
         themeService.modifyTheme(themeDto);
     }
