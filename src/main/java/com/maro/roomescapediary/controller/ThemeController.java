@@ -1,9 +1,12 @@
 package com.maro.roomescapediary.controller;
 
 import com.maro.roomescapediary.dto.ThemeDto;
+import com.maro.roomescapediary.dto.ThemeSearchDto;
 import com.maro.roomescapediary.service.ThemeService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +24,8 @@ public class ThemeController {
     private final ThemeService themeService;
 
     @GetMapping
-    public List<ThemeDto> searchThemes() {
-        return themeService.searchThemes();
+    public Page<ThemeDto> searchThemes(ThemeSearchDto searchDto, Pageable pageable) {
+        return themeService.searchThemes(searchDto, pageable);
     }
 
     @GetMapping("/{themeSeq}")

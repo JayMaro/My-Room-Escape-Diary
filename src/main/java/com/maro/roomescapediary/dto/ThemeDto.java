@@ -2,6 +2,7 @@ package com.maro.roomescapediary.dto;
 
 import com.maro.roomescapediary.entity.Store;
 import com.maro.roomescapediary.entity.Theme;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class ThemeDto {
 
     private int seq;
