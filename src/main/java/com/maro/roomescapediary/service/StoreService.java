@@ -17,6 +17,7 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public Page<StoreDto> searchStores(StoreSearchDto searchDto, Pageable pageable) {
+        searchDto.checkAndSetValues();
         return storeRepository.searchStore(searchDto, pageable);
     }
 

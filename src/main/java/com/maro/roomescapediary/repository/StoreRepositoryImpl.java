@@ -4,6 +4,7 @@ import static com.maro.roomescapediary.entity.QStore.store;
 
 import com.maro.roomescapediary.dto.StoreDto;
 import com.maro.roomescapediary.dto.StoreSearchDto;
+import com.maro.roomescapediary.utils.CommonUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 public class StoreRepositoryImpl implements StoreCustomRepository{
 
@@ -36,8 +36,8 @@ public class StoreRepositoryImpl implements StoreCustomRepository{
             )
             .from(store)
             .where(
-                StringUtils.hasText(searchDto.getName()) ? store.name.like("%" + searchDto.getName() + "%") : null,
-                StringUtils.hasText(searchDto.getBranchName()) ? store.branchName.like("%" + searchDto.getBranchName() + "%") : null
+                store.name.like(CommonUtils.makeLikeStr(searchDto.getName())),
+                store.branchName.like(CommonUtils.makeLikeStr(searchDto.getBranchName()))
             )
             .offset(pageable.getOffset())
             .limit(pageable.getPageSize())
@@ -46,7 +46,12 @@ public class StoreRepositoryImpl implements StoreCustomRepository{
         Long count = queryFactory
             .select(store.count())
             .from(store)
+            .where(
+                store.name.like(CommonUtils.makeLikeStr(searchDto.getName())),
+                store.branchName.like(CommonUtils.makeLikeStr(searchDto.getBranchName()))
+            )
             .fetchOne();
+
         return new PageImpl<>(contents, pageable, count);
     }
 }
