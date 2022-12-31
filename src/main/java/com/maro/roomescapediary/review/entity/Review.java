@@ -29,7 +29,7 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_seq")
     private Integer seq;
-
+    // TODO: 추후 user와 theme로 unique 조건 필요 -> 한 사람이 한 테마에 하나의 리뷰만
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theme_seq")
     private Theme theme;

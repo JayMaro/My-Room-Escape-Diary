@@ -6,6 +6,7 @@ import com.maro.roomescapediary.user.enums.JoinCode;
 import com.maro.roomescapediary.review.entity.Review;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +14,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -44,19 +48,25 @@ public class Users extends BaseEntity {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "salt", nullable = false, length = 100)
-    private String salt;
 
     @Column(name = "nick_name", nullable = false, unique = true, length = 50)
     private String nickName;
 
+    // TODO 다대다 -> 일대다 다대일 테이블로 변경, Authority 저장 및 수정 사용하는 부분 수정 필요
+    @ManyToMany
+    @JoinTable(
+        name = "user_authority",
+        joinColumns = {@JoinColumn(name = "user_seq", referencedColumnName = "user_seq")},
+        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
+    private Set<Authority> authorities;
+
     @Builder
-    public Users(JoinCode joinCode, String id, String password, String salt, String nickName) {
+    public Users(JoinCode joinCode, String id, String password, String nickName, Set<Authority> authority) {
         this.joinCode = joinCode;
         this.id = id;
         this.password = password;
-        this.salt = salt;
         this.nickName = nickName;
+        this.authorities = authority;
     }
 
     public UserDto toDto() {
@@ -73,7 +83,6 @@ public class Users extends BaseEntity {
         this.joinCode = userDto.getJoinCode();
         this.id = userDto.getId();
         this.password = userDto.getPassword();
-        this.salt = userDto.getSalt();
         this.nickName = userDto.getNickName();
     }
 
