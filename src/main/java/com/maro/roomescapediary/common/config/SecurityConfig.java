@@ -52,12 +52,9 @@ public class SecurityConfig {
 
             .and()
             .authorizeRequests().antMatchers("/user/login", "/user/signup", "/common/ping").permitAll()
-            .antMatchers().hasRole("ADMIN")
-            .anyRequest().authenticated()
+//            .antMatchers().hasRole("ADMIN")
+//            .anyRequest().authenticated()
             .and()
-//            .formLogin()
-//            .loginPage("/user/login").permitAll()
-//            .and()
             .logout().permitAll()
             .and()
             .apply(new JwtSecurityConfig(tokenProvider));
