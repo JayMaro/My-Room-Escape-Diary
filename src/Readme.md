@@ -1,3 +1,18 @@
+# 나의 방탈일지 토이 프로젝트 - 서버
+- 서비스 출시까지 하려고 했지만 더 재밌는게 생각나서 소스 공개
+
+### 사용한 기술
+SpringBoot 2.7.6\
+Java 8\
+JPA\
+H2
+### 추가 개발 필요 항목
+Test 코드 작성\
+로그인 기능 제대로 알고 추가하기(현재 강의 예제 적용됨)\
+Swagger 추가
+
+
+## DB 설계
 ## Store
 
 | Column | Datatype | Storage Option | Default Value | Comment |
